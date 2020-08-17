@@ -201,7 +201,11 @@ class MeshBuilder {
     
     /** Pass in the constructor from the poisson-disk-sampling module */
     addPoisson(Poisson, spacing, random=Math.random) {
-        let generator = new Poisson([1000, 1000], spacing, undefined, undefined, random);
+        let options = {
+            shape: [1000, 1000],
+            minDistance: spacing,
+        }
+        let generator = new Poisson(options, random);
         this.points.forEach(p => generator.addPoint(p));
         this.points = generator.fill();
         return this;
